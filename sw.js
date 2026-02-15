@@ -2,7 +2,7 @@ const CACHE_NAME = 'arizak-tech-v2';
 const urlsToCache = [
   '/',
   '/index.html',
-  'https://files.catbox.moe/mmchn4.jpg',
+  'https://files.catbox.moe/z5ss23.jpg',
   'https://files.catbox.moe/z5ss23.jpg',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
