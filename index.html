@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIZAK-TECH Portfolio - PWA</title>
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- NEW ICON - Applied everywhere -->
+    <link rel="icon" href="https://files.catbox.moe/z5ss23.jpg" type="image/jpg">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- iOS Support - Same new icon -->
+    <link rel="apple-touch-icon" href="https://files.catbox.moe/z5ss23.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ARIZAK TECH">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #22c55e;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo span {
+            color: #fbbf24;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: -2rem auto 2rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* CARDS */
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* SKILLS GRID */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .skill-icon {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* BUTTONS */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px var(--primary);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* INSTALL BUTTON */
+        #installContainer {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .install-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(37,99,235,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .install-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* PHOTO GALLERY */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .photo-item {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 150px;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* SERVICE LIST */
+        .service-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-list li {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-list i {
+            color: var(--secondary);
+        }
+
+        /* AUDIO PLAYER */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .audio-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .audio-info {
+            padding-right: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            margin: 1rem 0 2rem;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- INSTALL BUTTON CONTAINER -->
+    <div id="installContainer" style="display: none;">
+        <button id="installBtn" class="install-btn">
+            <i class="fas fa-download"></i>
+            Install App
+        </button>
+    </div>
+
+    <!-- HERO SECTION - Using your new image as banner too -->
+    <section class="hero">
+        <img src="https://files.catbox.moe/z5ss23.jpg" alt="Tech Banner">  <!-- ← UPDATED BANNER -->
+        <div class="text">
+            <h2>ARIZAK TECH</h2>
+            <p>Innovative Solutions for Modern Problems</p>
+        </div>
+    </section>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">ARIZAK-TECH <span>⚡</span></h1>
+            <p class="tagline">WhatsApp Bot Developer | Automation Expert | Tech Specialist</p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- ABOUT CARD -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-user-circle"></i> About Me</h2>
+            <p>Hi, I'm <strong>Abdirizak (ARIZAK-MD)</strong> — a passionate developer specializing in WhatsApp bots, automation systems, and tech solutions. I help businesses and individuals leverage technology to simplify their workflows and achieve more.</p>
+        </section>
+
+        <!-- SKILLS CARD -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-cogs"></i> Core Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-whatsapp"></i></div>
+                    <div class="skill-content">
+                        <h4>WhatsApp Bots</h4>
+                        <p>Advanced bot development with multi-device support</p>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <div class="skill-content">
+                        <h4>Web Development</h4>
+                        <p>Modern HTML, CSS, JavaScript, and responsive design</p>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-node"></i></div>
+                    <div class="skill-content">
+                        <h4>Node.js & Python</h4>
+                        <p>Backend development and automation scripts</p>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-plug"></i></div>
+                    <div class="skill-content">
+                        <h4>API Integration</h4>
+                        <p>Custom workflows and third-party integrations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS CARD -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-project-diagram"></i> Featured Project</h2>
+            <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 16px;">
+                <h3 style="margin-bottom: 1rem;">🤖 ARIZAK WhatsApp Bot</h3>
+                <p>A powerful, modular WhatsApp bot framework with advanced features and easy customization.</p>
+                <a href="https://github.com/arizak-md/arizak" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); margin-top: 1rem; text-decoration: none; font-weight: 600;">
+                    <i class="fab fa-github"></i> View on GitHub →
+                </a>
+            </div>
+        </section>
+
+        <!-- CONTACT CARD -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-address-card"></i> Connect With Me</h2>
+            
+            <div class="btn-group">
+                <a href="https://wa.me/254727740389" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="tel:+254727740389" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>
+                <a href="mailto:abdiriiadan3@gmail.com" class="btn btn-primary"><i class="far fa-envelope"></i> Email</a>
+                <a href="https://github.com/arizak-md" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+
+            <div class="btn-group">
+                <button onclick="openModal('photos')" class="btn btn-outline"><i class="fas fa-images"></i> Gallery</button>
+                <button onclick="openModal('services')" class="btn btn-outline"><i class="fas fa-list"></i> Services</button>
+                <button onclick="openModal('background')" class="btn btn-outline"><i class="fas fa-info-circle"></i> Background</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODALS -->
+    <!-- Photos Modal -->
+    <div id="photosModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-images"></i> Gallery</h2>
+                <button class="close-btn" onclick="closeModal('photos')">&times;</button>
+            </div>
+            <div class="photo-gallery">
+                <div class="photo-item"><img src="https://files.catbox.moe/f3b7y7.jpg" alt="Work 1"></div>
+                <div class="photo-item"><img src="https://files.catbox.moe/z6tnl2.jpg" alt="Work 2"></div>
+                <div class="photo-item"><img src="https://files.catbox.moe/siv633.jpg" alt="Work 3"></div>
+                <div class="photo-item"><img src="https://files.catbox.moe/z9jq5r.jpg" alt="Work 4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Modal -->
+    <div id="servicesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-concierge-bell"></i> Services</h2>
+                <button class="close-btn" onclick="closeModal('services')">&times;</button>
+            </div>
+            <ul class="service-list">
+                <li><i class="fas fa-robot"></i> WhatsApp Bot Development</li>
+                <li><i class="fas fa-rocket"></i> Social Media Automation</li>
+                <li><i class="fas fa-shield-alt"></i> VPN Configuration</li>
+                <li><i class="fas fa-sim-card"></i> Virtual Numbers</li>
+                <li><i class="fas fa-unlock"></i> Account Unban</li>
+                <li><i class="fas fa-chart-line"></i> SMM Panels</li>
+                <li><i class="fas fa-code"></i> Custom Scripts</li>
+                <li><i class="fas fa-headset"></i> 24/7 Support</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Background Modal -->
+    <div id="backgroundModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user"></i> Background</h2>
+                <button class="close-btn" onclick="closeModal('background')">&times;</button>
+            </div>
+            <div style="display: grid; gap: 1rem;">
+                <p><strong>📍 Location:</strong> Mandera, Kenya</p>
+                <p><strong>🕌 Religion:</strong> Muslim</p>
+                <p><strong>💻 Focus:</strong> Tech Innovation & Automation</p>
+                <p><strong>🎯 Mission:</strong> Making technology accessible to everyone</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO PLAYER -->
+    <div class="audio-player">
+        <button class="audio-toggle" id="audioToggle">
+            <i class="fas fa-play" id="playIcon"></i>
+        </button>
+        <span class="audio-info">Background Music</span>
+    </div>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://files.catbox.moe/02r11u.mp3" type="audio/mpeg">
+    </audio>
+
+    <footer class="footer">
+        <p>© 2024 ARIZAK TECH. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Built with ❤️ in Kenya</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== PWA INSTALLATION ==========
+        let deferredPrompt;
+        const installContainer = document.getElementById('installContainer');
+        const installBtn = document.getElementById('installBtn');
+
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installContainer.style.display = 'block';
+            console.log('✅ App can be installed');
+        });
+
+        // Handle install button click
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log('User response:', outcome);
+            
+            deferredPrompt = null;
+            installContainer.style.display = 'none';
+        });
+
+        // Hide install button if app is already installed
+        window.addEventListener('appinstalled', (e) => {
+            console.log('✅ App installed successfully');
+            installContainer.style.display = 'none';
+            deferredPrompt = null;
+        });
+
+        // ========== SERVICE WORKER REGISTRATION ==========
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+                    .catch(err => console.log('❌ Service Worker error:', err));
+            });
+        }
+
+        // ========== MODAL FUNCTIONS ==========
+        function openModal(type) {
+            const modal = document.getElementById(`${type}Modal`);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(type) {
+            const modal = document.getElementById(`${type}Modal`);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // ========== AUDIO PLAYER ==========
+        const audio = document.getElementById('bgMusic');
+        const audioToggle = document.getElementById('audioToggle');
+        const playIcon = document.getElementById('playIcon');
+
+        audio.volume = 0.5;
+        
+        // Try to autoplay
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                playIcon.className = 'fas fa-pause';
+            }).catch(() => {
+                playIcon.className = 'fas fa-play';
+            });
+        }
+
+        // Toggle play/pause
+        audioToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                }).catch(e => console.log('Play failed:', e));
+            } else {
+                audio.pause();
+                playIcon.className = 'fas fa-play';
+            }
+        });
+
+        audio.addEventListener('pause', () => {
+            playIcon.className = 'fas fa-play';
+        });
+
+        audio.addEventListener('play', () => {
+            playIcon.className = 'fas fa-pause';
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(card);
+        });
+
+        console.log('🚀 ARIZAK TECH PWA loaded with new icon!');
+    </script>
+</body>
+</html>
