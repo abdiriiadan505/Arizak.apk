@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIZAK-TECH Portfolio</title>
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="https://files.catbox.moe/mmchn4.jpg" type="image/png">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- iOS App Setup -->
+    <link rel="apple-touch-icon" href="https://files.catbox.moe/mmchn4.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ARIZAK Tech">
+    
+<!-- Backup Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
+    <!-- Combined CSS Styles -->
+    <style>
+        :root {
+            --primary-color: #FF0000;
+            --primary-dark: #000000;
+            --secondary-color: #0000FF;
+            --secondary-dark: #00FF9E;
+            --dark-color: #FFFF00;
+            --light-color: #FF7400;
+            --gray-color: #0000FF;
+            --gray-light: #00FF98;
+            --card-bg: #000000;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -2rem auto 0;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .card-title i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-item {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .skill-item:hover {
+            background: #f0f9ff;
+            transform: translateX(4px);
+        }
+        
+        .skill-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .skill-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--dark-color);
+        }
+        
+        .skill-content p {
+            color: var(--gray-color);
+            font-size: 0.95rem;
+        }
+        
+        /* Button Styles */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            min-width: 160px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(5, 150, 105, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Install Button Styles */
+        .install-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            transition: var(--transition);
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Project Section */
+        .project-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border: 1px solid var(--gray-light);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            color: var(--primary-dark);
+            gap: 0.75rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: slideUp 0.4s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .modal-header h3 {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-color);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-btn:hover {
+            background-color: var(--gray-light);
+            color: var(--dark-color);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .photo-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 150px;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Service List */
+        .service-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .service-list li {
+            background: var(--light-color);
+            padding: 0.875rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .service-list li:hover {
+            background: #FF0085;
+            transform: translateX(4px);
+        }
+        
+        .service-list li i {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        
+        /* Background Info */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-item {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .info-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        
+        .info-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+        
+        .info-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: #000000;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* ===== Hero Section ===== */
+        .hero {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .hero img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            filter: brightness(70%);
+        }
+        
+        .hero .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFF00;
+            text-align: center;
+        }
+        
+        .hero .text h2 {
+            font-size: 2.1em;
+        }
+        
+        .hero .text p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        /* ===== Menu Grid ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        /* Audio Player */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: white;
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .audio-toggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .audio-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        
+        .audio-info {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+            max-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: max-width 0.5s ease;
+        }
+        
+        .audio-player:hover .audio-info {
+            max-width: 200px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .container {
+                margin-top: -1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero .text h2 {
+                font-size: 1.5em;
+            }
+            
+            .hero .text p {
+                font-size: 1em;
+            }
+            
+            .install-btn {
+                bottom: 70px;
+                right: 15px;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    
+    <script>
+        // All JavaScript code will be placed at the end of body for better performance
+    </script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://files.catbox.moe/z5ss23.jpg" alt="Tech Banner">
+        <div class="text">
+            <h2>Welcome to Our Tech Journey</h2>
+            <p>Enjoy our services</p>
+        </div>
+    </section>
+
+    <!-- Install Button -->
+    <button id="installBtn" onclick="installApp()" class="install-btn">⬇️ Install App</button>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">ARIZAK-TECH<span>[Abdirizak]</span></h1>
+            <p class="tagline">Tech Specialist | WhatsApp Bot Developer | Automation Expert</p>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Card -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-user"></i> About Me</h2>
+            <p>Hello! I'm <strong>ARIZAK-MD</strong> — a passionate, self-taught developer specializing in WhatsApp bots, automation systems, and SMM tools. With a focus on making technology accessible and powerful, I create solutions that simplify complex processes and deliver tangible results for clients worldwide.</p>
+        </section>
+        <!-- Skills Card -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-tools"></i> Key Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="skill-content">
+                        <h4>WhatsApp Bot Development</h4>
+                        <p>Expertise in developing robust, feature-rich WhatsApp bots for automation and engagement.</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="skill-content">
+                        <h4>Web Development</h4>
+                        <p>Proficient in modern web technologies: HTML5, CSS3, JavaScript, and responsive design.</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <div class="skill-content">
+                        <h4>Programming Languages</h4>
+                        <p>Advanced skills in Node.js & Python for backend development and automation scripts.</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div class="skill-content">
+                        <h4>Web Design & Hosting</h4>
+                        <p>Skilled in designing professional websites and managing secure hosting solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="skill-content">
+                        <h4>App Automation & APIs</h4>
+                        <p>Experienced in app automation, API integration, and custom workflow solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+     <!-- Projects Card -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-project-diagram"></i> Featured Projects</h2>
+            <p>Explore my main repository and ongoing development projects:</p>
+            <div class="project-card">
+                <h3>ARIZAK WhatsApp Bot Framework</h3>
+                <p>A comprehensive framework for building powerful WhatsApp bots with modular architecture and extensive plugin support.</p>
+                <a href="https://github.com/arizak-md/arizak" target="_blank" class="project-link">
+                    <i class="fab fa-github"></i> View on GitHub
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Contact & Actions Card -->
+        <section class="card">
+            <h2 class="card-title"><i class="fas fa-envelope"></i> Contact & Actions</h2>
+            
+            <div class="btn-group">
+                <a href="https://whatsapp.com/channel/0029Vb4q0dBF1YlYwsYt9N0l" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Channel
+                </a>
+                <a href="tel:+254727740389" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> Call Me
+                </a>
+                <a href="https://wa.me/254727740389" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Chat
+                </a>
+                <a href="mailto:abdiriiadan3@gmail.com" class="btn btn-primary">
+                    <i class="far fa-envelope"></i> Email Me
+                </a>
+                <a href="https://github.com/arizak-md" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-github"></i> GitHub Profile
+                </a>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="openModal('photosModal')">
+                    <i class="fas fa-image"></i> Portfolio Photos
+                </button>
+                <button class="btn btn-primary" onclick="openModal('moreModal')">
+                    <i class="fas fa-list"></i> Services
+                </button>
+                <button class="btn btn-outline" onclick="openModal('backgroundModal')">
+                    <i class="fas fa-globe"></i> Background
+                </button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2023 ARIZAK TECH Portfolio. All rights reserved.</p>
+        <p>Designed with precision and passion for technology.</p>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="photosModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-images"></i> Portfolio Gallery</h3>
+                <button class="close-btn" onclick="closeModal('photosModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Explore visual highlights from my work and projects.</p>
+                <div class="photo-gallery">
+                    <div class="photo-item">
+                        <img src="https://files.catbox.moe/f3b7y7.jpg" alt="Project 1">
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://files.catbox.moe/z6tnl2.jpg" alt="Project 2">
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://files.catbox.moe/siv633.jpg" alt="Project 3">
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://files.catbox.moe/z9jq5r.jpg" alt="Project 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="moreModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-concierge-bell"></i> Professional Services</h3>
+                <button class="close-btn" onclick="closeModal('moreModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>I offer a wide range of technology solutions to meet your business needs:</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-robot"></i> WhatsApp bot deployment</li>
+                    <li><i class="fas fa-rocket"></i> Social media boost</li>
+                    <li><i class="fas fa-shield-alt"></i> VPN configuration & files</li>
+                    <li><i class="fas fa-sim-card"></i> WhatsApp virtual numbers</li>
+                    <li><i class="fas fa-broadcast-tower"></i> Cast & broadcasting solutions</li>
+                    <li><i class="fas fa-chart-line"></i> Social media panels</li>
+                    <li><i class="fas fa-unlock"></i> WhatsApp account unban</li>
+                    <li><i class="fas fa-hands-helping"></i> Consultation & support</li>
+                    <li><i class="fas fa-plus-circle"></i> Custom automation solutions</li>
+                </ul>
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 10px;">
+                    <p style="margin-bottom: 1rem;"><strong>Get in touch for custom solutions:</strong></p>
+                    <a href="https://wa.me/254727740389" target="_blank" class="btn btn-primary" style="display: inline-flex;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp: +254 727 740 389
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="backgroundModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-circle"></i> Personal Background</h3>
+                <button class="close-btn" onclick="closeModal('backgroundModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Location</h4>
+                        <p>Kenya</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h4>Region</h4>
+                        <p>Mandera County</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <h4>Religion</h4>
+                        <p>Muslim</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>Focus</h4>
+                        <p>Technology & Innovation</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem; font-style: italic; color: var(--gray-color);">
+                    "My diverse background fuels my passion for creating technology solutions that bridge gaps and empower communities."
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio Player -->
+    <div class="audio-player">
+        <button class="audio-toggle" id="audioToggle">
+            <i class="fas fa-play" id="playIcon"></i>
+        </button>
+        <div class="audio-info">Background music: One Side Remix</div>
+    </div>
+    
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/02r11u.mp3" type="audio/mp3">
+    </audio>
+    
+    <!-- JavaScript -->
+    <script>
+        let deferredPrompt;
+        
+        // PWA Installation
+        window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById("installBtn").style.display = "block";
+        });
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === "accepted") {
+                        console.log("App installed!");
+                        document.getElementById("installBtn").style.display = "none";
+                    } else {
+                        console.log("App dismissed!");
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+        
+        // Service Worker
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js")
+                    .then(() => console.log("✅ Service Worker Registered"))
+                    .catch((err) => console.log("❌ Service Worker Failed:", err));
+            });
+        }
+        
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+            }
+        }
+        
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = "auto";
+                    }
+                });
+            }
+        });
+        
+        // Audio control
+        const audio = document.getElementById('bgMusic');
+        const audioToggle = document.getElementById('audioToggle');
+        const playIcon = document.getElementById('playIcon');
+        
+        // Auto-start audio on page load with error handling
+        window.addEventListener('load', function() {
+            // Try auto-play
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    playIcon.className = 'fas fa-pause';
+                }).catch(error => {
+                    console.log("Auto-play prevented:", error);
+                    playIcon.className = 'fas fa-play';
+                });
+            }
+        });
+        
+        // Toggle audio play/pause
+        audioToggle.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                }).catch(error => {
+                    console.log("Play failed:", error);
+                });
+            } else {
+                audio.pause();
+                playIcon.className = 'fas fa-play';
+            }
+        });
+        
+        // Update audio icon based on playback state
+        audio.addEventListener('play', function() {
+            playIcon.className = 'fas fa-pause';
+        });
+        
+        audio.addEventListener('pause', function() {
+            playIcon.className = 'fas fa-play';
+        });
+        
+        // Card animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply animation to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+        
+        // Hide install button initially
+        document.getElementById("installBtn").style.display = "none";
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
